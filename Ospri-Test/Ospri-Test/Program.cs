@@ -4,6 +4,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Ospri_Test.Database;
+using Ospri_Test.Logging;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,8 +17,8 @@ namespace Ospri_Test
     {
         public static void Main(string[] args)
         {
-            var host = CreateHostBuilder(args).Build();
 
+            var host = CreateHostBuilder(args).Build();
             CreateUserDb(host);
             host.Run();
         }
@@ -30,7 +32,7 @@ namespace Ospri_Test
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
+            Host.CreateDefaultBuilder(args).UseSerilog()
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();

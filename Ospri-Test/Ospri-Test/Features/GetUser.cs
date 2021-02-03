@@ -24,7 +24,7 @@ namespace Ospri_Test.Features
 
             return Task.Run(() =>
             {
-                return DatabaseConnection.Users.First(x => x.Id == request.Id);
+                return DatabaseConnection.Users.FirstOrDefault(x => x.Id == request.Id);
             });
         }
     }

@@ -10,6 +10,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Ospri_Test.Database;
+using Ospri_Test.Logging;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +25,7 @@ namespace Ospri_Test
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            SerilogConfig.setupLogging(Configuration);
         }
 
         public IConfiguration Configuration { get; }
@@ -52,11 +55,13 @@ namespace Ospri_Test
             }
 
             app.UseHttpsRedirection();
-
+            // Adding Logging
+            app.UseSerilogRequestLogging();
+            
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.AddLoggingMiddleware();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
