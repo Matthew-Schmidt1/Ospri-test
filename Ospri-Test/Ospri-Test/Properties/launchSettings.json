@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Ospri_Test": {
+    "OspriTest": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Ospri_Test.Database
+namespace OspriTest.Database
 {
     public class DataGenerator
     {
@@ -33,7 +33,7 @@ namespace Ospri_Test.Database
                     return;
                 }
 
-                context.Add(new Models.User() { Address = "", DateOfBith = DateTime.Now, FirstName = "Seed", LastName = "Test" });
+                context.Add(new Models.User() { Address = "142345678910111213141516171819a", DateOfBith = DateTime.Now, FirstName = "Seed", LastName = "Test" });
                 context.SaveChanges();
             }
 

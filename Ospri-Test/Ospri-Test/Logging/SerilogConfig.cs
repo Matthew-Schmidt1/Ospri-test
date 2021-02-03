@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Ospri_Test.Logging
+namespace OspriTest.Logging
 {
     public class SerilogConfig
     {

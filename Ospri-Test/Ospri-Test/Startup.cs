@@ -9,8 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using Ospri_Test.Database;
-using Ospri_Test.Logging;
+using OspriTest.Database;
+using OspriTest.Logging;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -18,7 +18,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace Ospri_Test
+namespace OspriTest
 {
     public class Startup
     {
@@ -37,7 +37,7 @@ namespace Ospri_Test
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Ospri_Test", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "OspriTest", Version = "v1" });
             });
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddDbContext<UsersDBContext>(options => options.UseInMemoryDatabase(databaseName: "Users"));
@@ -51,7 +51,7 @@ namespace Ospri_Test
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Ospri_Test v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "OspriTest v1"));
             }
 
             app.UseHttpsRedirection();

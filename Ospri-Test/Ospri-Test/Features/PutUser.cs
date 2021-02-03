@@ -1,6 +1,6 @@
 ﻿using MediatR;
-using Ospri_Test.Database;
-using Ospri_Test.Models;
+using OspriTest.Database;
+using OspriTest.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Ospri_Test.Features
+namespace OspriTest.Features
 {
     public class PutUser : IRequestHandler<PutUserRequest, User>
     {

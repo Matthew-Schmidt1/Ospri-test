@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Ospri_Test.Models;
+using OspriTest.Models;
 
-namespace Ospri_Test.Database
+namespace OspriTest.Database
 {
     public class UsersDBContext : DbContext
     {

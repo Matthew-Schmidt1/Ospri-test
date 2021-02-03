@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
-using Ospri_Test.Logging;
+using OspriTest.Logging;
 using Serilog;
 using Serilog.Context;
 using System;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ospri_Test.Logging
+namespace OspriTest.Logging
 {
     /// <summary>
     /// Stolen from 

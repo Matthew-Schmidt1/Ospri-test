@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Ospri_Test.Features;
-using Ospri_Test.Models;
+using OspriTest.Features;
+using OspriTest.Models;
 
-namespace Ospri_Test.Interfaces
+namespace OspriTest.Interfaces
 {
     public interface IUsers
     {
