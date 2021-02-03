@@ -12,6 +12,15 @@ using System.Threading.Tasks;
 
 namespace Ospri_Test.Logging
 {
+    /// <summary>
+    /// Stolen from 
+    /// https://stackoverflow.com/questions/63573551/how-to-add-request-body-in-serilogs-output-net-core
+    /// 
+    /// using Answer from:
+    /// https://stackoverflow.com/users/7062291/zhi-lv
+    /// 
+    /// Didn't want to recreate this wheel
+    /// </summary>
     public class LoggingMiddleware
     {
         private readonly RequestDelegate _next;
@@ -21,7 +30,11 @@ namespace Ospri_Test.Logging
             if (next == null) throw new ArgumentNullException(nameof(next));
             _next = next;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="httpContext"></param>
+        /// <returns></returns>
         public async Task Invoke(HttpContext httpContext)
         {
 

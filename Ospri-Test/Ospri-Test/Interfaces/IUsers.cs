@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Ospri_Test.Features;
 using Ospri_Test.Models;
 
 namespace Ospri_Test.Interfaces
@@ -9,6 +10,6 @@ namespace Ospri_Test.Interfaces
         ActionResult<User> Get(int id);
         
         // POST api/Users
-        ActionResult<User> Post([FromBody] User value);
+        ActionResult<User> Post([FromBody] PutUserRequest value);
     }
 }

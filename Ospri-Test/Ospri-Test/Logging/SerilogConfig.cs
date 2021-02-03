@@ -16,8 +16,7 @@ namespace Ospri_Test.Logging
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(configuration)
             .Enrich.FromLogContext()
-            .WriteTo.Console()
-            .WriteTo.File(new RenderedCompactJsonFormatter(),"logging.log")
+            .WriteTo.Console(new RenderedCompactJsonFormatter())
             .CreateLogger();
         }
     }

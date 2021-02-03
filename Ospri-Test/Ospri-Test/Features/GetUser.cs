@@ -1,8 +1,10 @@
 ﻿using MediatR;
+using Microsoft.VisualBasic.CompilerServices;
 using Ospri_Test.Database;
 using Ospri_Test.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -31,7 +33,7 @@ namespace Ospri_Test.Features
 
     public record GetUserRequest : IRequest<User>
     {
-       public int Id { get; init; }
+        public int Id { get; init; }
     }
 
 }

@@ -11,11 +11,21 @@ namespace Ospri_Test.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+        
+        [Required]
+        [DataType(DataType.Text)]
         public string FirstName { get; set; }
         [Required]
+        [DataType(DataType.Text)]
         public string LastName { get; set; }
-        public string Address { get; set; }
+        
         [Required]
+        [DataType(DataType.Text)]
+        
+        public string Address { get; set; }
+        
+        [Required]
+        [DataType(DataType.Date)]
         public DateTime DateOfBith { get; set; }
     }
 }
