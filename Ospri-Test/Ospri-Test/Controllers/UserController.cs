@@ -29,7 +29,7 @@ namespace OspriTest.Controllers
         {
             var response = _mediator.Send(new GetUserRequest() { Id = id }).GetAwaiter().GetResult();
             if (response != null)
-                return response;
+                return Ok(response);
             return NoContent();
         }
 
