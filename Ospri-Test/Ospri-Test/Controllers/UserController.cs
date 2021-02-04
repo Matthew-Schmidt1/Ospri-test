@@ -45,7 +45,7 @@ namespace OspriTest.Controllers
             }
             else
             {
-                return Ok("Post Failed but know error raised");
+                return BadRequest("Post Failed but no error raised");
             }
 
         }
