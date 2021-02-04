@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using OspriTest.Database;
 using OspriTest.Models;
 using System;
@@ -10,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace OspriTest.Features
 {
-    public class PutUser : IRequestHandler<PutUserRequest, User>
+    public class PutUserService : IRequestHandler<PutUserRequest, User>
     {
         public UsersDBContext DatabaseConnection;
 
-        public PutUser(UsersDBContext dBContext)
+        public PutUserService(UsersDBContext dBContext)
         {
             DatabaseConnection = dBContext;
         }
@@ -22,30 +23,37 @@ namespace OspriTest.Features
 
         public async Task<User> Handle(PutUserRequest request, CancellationToken cancellationToken)
         {
-            //If this was a real database i would assume some lag and want to run the method as a async request.
-            var data = await DatabaseConnection.Users.AddAsync(new User()
-            {
-                FirstName = request.FirstName,
-                LastName = request.LastName,
-                Address = request.Address,
-                DateOfBith = request.DateOfBith
-            }).ConfigureAwait(false);
-            await DatabaseConnection.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
-            return data.Entity;
+           
+                //If this was a real database i would assume some lag and want to run the method as a async request.
+                var data = await DatabaseConnection.Users.AddAsync(new User()
+                {
+                    FirstName = request.FirstName,
+                    LastName = request.LastName,
+                    Address = request.Address,
+                    DateOfBith = request.DateOfBith
+                }).ConfigureAwait(false);
+                DatabaseConnection.SaveChanges();
+                return data.Entity;
         }
     }
 
     public record PutUserRequest : IRequest<User>
     {
+
         [Required]
         [DataType(DataType.Text)]
+        [StringLength(255, MinimumLength = 1)]
         public string FirstName { get; set; }
         [Required]
         [DataType(DataType.Text)]
+        [StringLength(255, MinimumLength = 1)]
         public string LastName { get; set; }
+
         [Required]
         [DataType(DataType.Text)]
+        [StringLength(255, MinimumLength = 20)]
         public string Address { get; set; }
+
         [Required]
         [DataType(DataType.Date)]
         public DateTime DateOfBith { get; set; }

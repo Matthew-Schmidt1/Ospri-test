@@ -24,7 +24,7 @@ namespace OspriTest.Models
         
         [Required]
         [DataType(DataType.Text)]
-        [StringLength(255, MinimumLength = 20)]
+        [StringLength(255, MinimumLength = 5)]
         public string Address { get; set; }
         
         [Required]

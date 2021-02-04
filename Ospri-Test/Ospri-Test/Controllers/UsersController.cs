@@ -27,9 +27,9 @@ namespace OspriTest.Controllers
         [HttpGet("{id}")]
         public ActionResult<Models.User> Get(int id)
         {
-            var result = _mediator.Send(new GetUserRequest() { Id = id }).GetAwaiter().GetResult();
-            if (result != null)
-                return result;
+            var response = _mediator.Send(new GetUserRequest() { Id = id }).GetAwaiter().GetResult();
+            if (response != null)
+                return response;
             return NoContent();
         }
 
@@ -37,11 +37,11 @@ namespace OspriTest.Controllers
         [HttpPost]
         public ActionResult<Models.User> Post([FromBody] PutUserRequest value)
         {
-            var Id = _mediator.Send(value).GetAwaiter().GetResult();
+            var response = _mediator.Send(value).GetAwaiter().GetResult();
 
-            if (Id != null)
+            if (response != null)
             {
-                return Created(Request.QueryString.Value, Id);
+                return Created(Request.QueryString.Value, response);
             }
             else
             {

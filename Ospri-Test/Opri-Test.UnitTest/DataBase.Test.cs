@@ -4,11 +4,12 @@ using OspriTest.Database;
 using OspriTest.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace Opri_Test.UnitTest
 {
-    public class DataBaseTest
+    public class DataBase
     {
         [Test]
         public void BasicAddingUserTest()
@@ -20,7 +21,7 @@ namespace Opri_Test.UnitTest
             // Insert seed data into the database using one instance of the context
             using (var context = new UsersDBContext(options))
             {
-                context.Add(new User() { Address = "142345678910111213141516171819a", DateOfBith = DateTime.Now, FirstName = "Seed", LastName = "Test" });
+                context.Add(new User() { Address = "12345", DateOfBith = DateTime.Now, FirstName = "Seed", LastName = "Test" });
                 context.SaveChanges();
             }
 
@@ -42,9 +43,9 @@ namespace Opri_Test.UnitTest
             // Insert seed data into the database using one instance of the context
             using (var context = new UsersDBContext(options))
             {
-                context.Add(new User() { Address = "142345678910111213141516171819a", DateOfBith = DateTime.Now, FirstName = "Seed", LastName = "Test" });
-                context.Add(new User() { Address = "142345678910111213141516171819a", DateOfBith = DateTime.Now, FirstName = "Correct", LastName = "Test1234" });
-                context.Add(new User() { Address = "142345678910111213141516171819a", DateOfBith = DateTime.Now, FirstName = "Seed", LastName = "Test" });
+                context.Add(new User() { Address = "12345", DateOfBith = DateTime.Now, FirstName = "Seed", LastName = "Test" });
+                context.Add(new User() { Address = "12345", DateOfBith = DateTime.Now, FirstName = "Correct", LastName = "Test1234" });
+                context.Add(new User() { Address = "12345", DateOfBith = DateTime.Now, FirstName = "Seed", LastName = "Test" });
                 context.SaveChanges();
             }
 
@@ -55,10 +56,9 @@ namespace Opri_Test.UnitTest
                 Assert.IsNotNull(user);
                 Assert.IsFalse(string.IsNullOrWhiteSpace(user.FirstName));
                 Assert.IsFalse(string.IsNullOrWhiteSpace(user.LastName));
-                Assert.IsTrue(string.IsNullOrWhiteSpace(user.Address));
+                Assert.IsFalse(string.IsNullOrWhiteSpace(user.Address));
                 Assert.IsTrue(user.DateOfBith > DateTime.Now.AddDays(-1));
                 Assert.IsTrue(user.LastName.Equals("Test1234", StringComparison.InvariantCultureIgnoreCase));
-
             }
         }
 
@@ -72,22 +72,43 @@ namespace Opri_Test.UnitTest
             // Insert seed data into the database using one instance of the context
             using (var context = new UsersDBContext(options))
             {
-                context.Add(new User() { Address = "", DateOfBith = DateTime.Now, FirstName = "Seed", LastName = "Test" });
-                context.Add(new User() { Address = "", DateOfBith = DateTime.Now, FirstName = "Correct", LastName = "Test1234" });
-                context.Add(new User() { Address = "", DateOfBith = DateTime.Now, FirstName = "Seed", LastName = "Test" });
+                context.Add(new User() { Address = "12345", DateOfBith = DateTime.Now, FirstName = "Seed", LastName = "Test" });
+                context.Add(new User() { Address = "12345", DateOfBith = DateTime.Now, FirstName = "Correct", LastName = "Test1234" });
+                context.Add(new User() { Address = "12345", DateOfBith = DateTime.Now, FirstName = "Seed", LastName = "Test" });
                 context.SaveChanges();
             }
 
             // Use a clean instance of the context to run the test
             using (var context = new UsersDBContext(options))
             {
-                var user = context.Users.FirstOrDefault(s => s.Id==3);
+                var user = context.Users.FirstOrDefault(s => s.Id == 3);
                 Assert.IsNotNull(user);
                 Assert.IsFalse(string.IsNullOrWhiteSpace(user.FirstName));
                 Assert.IsFalse(string.IsNullOrWhiteSpace(user.LastName));
-                Assert.IsTrue(string.IsNullOrWhiteSpace(user.Address));
+                Assert.IsFalse(string.IsNullOrWhiteSpace(user.Address));
                 Assert.IsTrue(user.DateOfBith > DateTime.Now.AddDays(-1));
                 Assert.IsTrue(user.LastName.Equals("Test1234", StringComparison.InvariantCultureIgnoreCase));
+            }
+        }
+
+        [Test]
+        public void TestDbValidationOfDataModel()
+        {
+            var options = new DbContextOptionsBuilder<UsersDBContext>()
+                        .UseInMemoryDatabase(databaseName: "User")
+                        .Options;
+            try
+            {
+                // Insert seed data into the database using one instance of the context
+                using (var context = new UsersDBContext(options))
+                {
+                    context.Add(new User() { Address = "12345", DateOfBith = DateTime.Now, FirstName = "", LastName = "Test" });
+                    context.SaveChanges();
+                }
+            }
+            catch (ValidationException ex)
+            {
+                Assert.IsTrue(ex.Message.Contains("The FirstName field is required"));
             }
         }
     }

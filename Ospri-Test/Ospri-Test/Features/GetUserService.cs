@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic.CompilerServices;
 using OspriTest.Database;
 using OspriTest.Models;
@@ -11,11 +12,11 @@ using System.Threading.Tasks;
 
 namespace OspriTest.Features
 {
-    public class GetUser : IRequestHandler<GetUserRequest, User>
+    public class GetUserService : IRequestHandler<GetUserRequest, User>
     {
         public UsersDBContext DatabaseConnection;
 
-        public GetUser(UsersDBContext dBContext)
+        public GetUserService(UsersDBContext dBContext)
         {
             DatabaseConnection = dBContext;
         }
