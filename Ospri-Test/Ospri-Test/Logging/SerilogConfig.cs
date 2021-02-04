@@ -10,14 +10,15 @@ namespace OspriTest.Logging
 {
     public class SerilogConfig
     {
-        
-        public static void setupLogging(IConfiguration configuration)
+
+        public static void SetupLogging(IConfiguration configuration)
         {
             Log.Logger = new LoggerConfiguration()
+                //Add if we need to change logging after deployment.
                 .ReadFrom.Configuration(configuration)
-            .Enrich.FromLogContext()
-            .WriteTo.Console(new RenderedCompactJsonFormatter())
-            .CreateLogger();
+                .Enrich.FromLogContext()
+                .WriteTo.Console(new RenderedCompactJsonFormatter())
+                .CreateLogger();
         }
     }
 }

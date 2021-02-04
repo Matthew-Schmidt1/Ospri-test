@@ -13,17 +13,17 @@ namespace OspriTest.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase, IUsers
+    public class UserController : ControllerBase, IUsers
     {
 
         private readonly IMediator _mediator;
 
-        public UsersController(IMediator mediator)
+        public UserController(IMediator mediator)
         {
             _mediator = mediator;
         }
 
-        // GET api/<UsersController>/5
+        // GET api/<UserController>/5
         [HttpGet("{id}")]
         public ActionResult<Models.User> Get(int id)
         {
@@ -33,7 +33,7 @@ namespace OspriTest.Controllers
             return NoContent();
         }
 
-        // POST api/<UsersController>
+        // POST api/<UserController>
         [HttpPost]
         public ActionResult<Models.User> Post([FromBody] PutUserRequest value)
         {
