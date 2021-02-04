@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OspriTest", "Ospri-Test\OspriTest.csproj", "{5A652B95-1193-483B-9006-734B12489686}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OspriTest.UnitTest", "Opri-Test.UnitTest\OspriTest.UnitTest.csproj", "{6A010915-A9C7-4F85-961C-9A2C8F0135BA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OspriTest.UnitTest", "Ospri-Test.UnitTest\OspriTest.UnitTest.csproj", "{6A010915-A9C7-4F85-961C-9A2C8F0135BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
