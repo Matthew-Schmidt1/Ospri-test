@@ -33,7 +33,7 @@ namespace OspriTest.Database
                     return;
                 }
 
-                context.Add(new Models.User() { Address = "142345678910111213141516171819a", DateOfBith = DateTime.Now, FirstName = "Seed", LastName = "Test" });
+                context.Add(new Models.User() { Address = "123456", DateOfBith = DateTime.Now, FirstName = "Seed", LastName = "Test" });
                 context.SaveChanges();
             }
 

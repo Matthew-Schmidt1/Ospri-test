@@ -29,7 +29,7 @@ namespace OspriTest.Features
                     LastName = request.LastName,
                     Address = request.Address,
                     DateOfBith = request.DateOfBith
-                }).ConfigureAwait(false);
+                }, cancellationToken).ConfigureAwait(false);
                 DatabaseConnection.SaveChanges();
                 return data.Entity;
         }
