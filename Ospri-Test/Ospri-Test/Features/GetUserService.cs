@@ -23,8 +23,6 @@ namespace OspriTest.Features
 
         public Task<User> Handle(GetUserRequest request, CancellationToken cancellationToken)
         {
-            //If this was a real database i would assume some lag and want to run the method as a async request.
-
             return Task.Run(() =>
             {
                 return DatabaseConnection.Users.FirstOrDefault(x => x.Id == request.Id);
