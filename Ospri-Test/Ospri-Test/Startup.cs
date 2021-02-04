@@ -61,7 +61,10 @@ namespace OspriTest
             app.UseRouting();
 
             app.UseAuthorization();
+
+            // Custom Logging middle ware
             app.AddLoggingMiddleware();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
