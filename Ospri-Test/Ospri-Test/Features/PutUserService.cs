@@ -1,11 +1,8 @@
 ﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
 using OspriTest.Database;
 using OspriTest.Models;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 

@@ -35,6 +35,7 @@ namespace OspriTest.UnitTest.Features
 
                 Assert.IsNotNull(response);
                 Assert.IsTrue(response.Id == 1);
+                Assert.IsTrue(response.FirstName == "Seed");
             }
 
         }

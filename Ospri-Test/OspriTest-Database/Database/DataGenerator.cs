@@ -1,10 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Serilog;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace OspriTest.Database
 {
@@ -38,8 +34,8 @@ namespace OspriTest.Database
                     return;
                 }
 
-                context.Add(new Models.User() { Address = "123456", DateOfBith = DateTime.Now, FirstName = "Seed", LastName = "Test" });
-                context.SaveChanges();
+                //context.Add(new Models.User() { Address = "123456", DateOfBith = DateTime.Now, FirstName = "Seed", LastName = "Test" });
+                //context.SaveChanges();
             }
 
         }
