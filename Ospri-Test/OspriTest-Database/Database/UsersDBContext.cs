@@ -5,12 +5,22 @@ using System.Linq;
 using System.Threading.Tasks;
 using OspriTest.Models;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.Extensions.Logging;
 
 namespace OspriTest.Database
 {
     public class UsersDBContext : DbContext
     {
-        public UsersDBContext(DbContextOptions<UsersDBContext> options) : base(options) {}
+        private readonly ILoggerFactory _loggerFactory;
+
+        public UsersDBContext(DbContextOptions<UsersDBContext> options, ILoggerFactory loggerFactory) : base(options) {
+            _loggerFactory = loggerFactory;
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseLoggerFactory(_loggerFactory);
+        }
 
         public DbSet<User> Users { get; set; }
 

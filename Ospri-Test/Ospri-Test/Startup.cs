@@ -9,7 +9,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using OspriTest.Configuration;
 using OspriTest.Database;
+using OspriTest.Features;
 using OspriTest.Logging;
 using Serilog;
 using System;
@@ -29,19 +31,35 @@ namespace OspriTest
         }
 
         public IConfiguration Configuration { get; }
-
+        private Settings _settings;
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddOptions()
+                    .Configure<Settings>(Configuration.GetSection("Settings"))
+                    .AddSingleton(Configuration);
+            _settings = Configuration.GetSection(nameof(Settings)).Get<Settings>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "OspriTest", Version = "v1" });
             });
-            services.AddMediatR(Assembly.GetExecutingAssembly());
-            services.AddDbContext<UsersDBContext>(options => options.UseInMemoryDatabase(databaseName: "Users"));
-
+            services.AddMediatR(cfg =>
+            {
+                cfg.RegisterServicesFromAssemblies(typeof(GetUserRequest).Assembly);
+                cfg.RegisterServicesFromAssemblies(typeof(PutUserRequest).Assembly);
+            });
+            services.AddDbContext<UsersDBContext>(options => {
+                if (_settings.DatabaseSettings.UseInMemory)
+                {
+                    options.UseInMemoryDatabase(databaseName: "Users");
+                }
+                else
+                {
+                    options.UseSqlServer(_settings.DatabaseSettings.BuildConnectionString());
+                }
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,7 +75,7 @@ namespace OspriTest
             app.UseHttpsRedirection();
             // Adding Logging
             app.UseSerilogRequestLogging();
-            
+
             app.UseRouting();
 
             app.UseAuthorization();

@@ -1,1 +1,0 @@
-# Ospri-test

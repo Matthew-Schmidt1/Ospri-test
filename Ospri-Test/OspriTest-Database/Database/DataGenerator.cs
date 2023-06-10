@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -9,22 +10,22 @@ namespace OspriTest.Database
 {
     public class DataGenerator
     {
-        private static readonly ILogger _log = Log.Logger;
-
-
+        private static readonly Serilog.ILogger _log = Log.Logger;
 
         public static void Initialize(IServiceProvider serviceProvider)
         {
             var log = _log.ForContext<DataGenerator>();
             log.Information("Initialize DataBases");
-
+            
             var options = (DbContextOptions<UsersDBContext>)serviceProvider.GetService(typeof(DbContextOptions<UsersDBContext>));
+            var logFactory =(ILoggerFactory) serviceProvider.GetService(typeof(ILoggerFactory));
+            
             if (options == null)
             {
                 log.Error("(DbContextOptions<UsersDBContext>)serviceProvider.GetService(typeof(DbContextOptions<UsersDBContext>)) returned null");
                 throw new InvalidOperationException();
             }
-            using (var context = new UsersDBContext(options))
+            using (var context = new UsersDBContext(options, logFactory))
             {
                 if (context.Users.Any())
                 {
