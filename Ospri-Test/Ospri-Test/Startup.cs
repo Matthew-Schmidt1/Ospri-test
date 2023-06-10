@@ -27,7 +27,7 @@ namespace OspriTest
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            SerilogConfig.SetupLogging(Configuration);
+            
         }
 
         public IConfiguration Configuration { get; }

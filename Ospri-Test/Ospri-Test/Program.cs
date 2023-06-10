@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using OspriTest.Database;
 using OspriTest.Logging;
 using Serilog;
+using Serilog.Formatting.Compact;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,9 +33,14 @@ namespace OspriTest
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args).UseSerilog()
+            Host.CreateDefaultBuilder(args).UseSerilog((ctx, lc) =>
+                    lc.ReadFrom.Configuration(ctx.Configuration)
+                    .Enrich.FromLogContext()
+                    .WriteTo.Console(new RenderedCompactJsonFormatter())
+                )
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+
                     webBuilder.UseStartup<Startup>();
                 });
     }

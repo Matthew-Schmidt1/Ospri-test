@@ -24,7 +24,7 @@ namespace OspriTest.UnitTest.Features
                         .Options;
 
             // Insert seed data into the database using one instance of the context
-            using (var context = new UsersDBContext(options))
+            using (var context = new UsersDBContext(options, null))
             {
                 var service = new PutUserService(context);
                 var cancelToken = new CancellationToken();
@@ -48,7 +48,7 @@ namespace OspriTest.UnitTest.Features
                         .Options;
 
             // Insert seed data into the database using one instance of the context
-            using (var context = new UsersDBContext(options))
+            using (var context = new UsersDBContext(options, null))
             {
                 var service = new PutUserService(context);
                 var cancelToken = new CancellationToken();

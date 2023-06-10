@@ -17,16 +17,16 @@ namespace Opri_Test.UnitTest
             var options = new DbContextOptionsBuilder<UsersDBContext>()
                         .UseInMemoryDatabase(databaseName: "User")
                         .Options;
-
+            
             // Insert seed data into the database using one instance of the context
-            using (var context = new UsersDBContext(options))
+            using (var context = new UsersDBContext(options,null))
             {
                 context.Add(new User() { Address = "12345", DateOfBith = DateTime.Now, FirstName = "Seed", LastName = "Test" });
                 context.SaveChanges();
             }
 
             // Use a clean instance of the context to run the test
-            using (var context = new UsersDBContext(options))
+            using (var context = new UsersDBContext(options,null))
             {
                 List<User> users = context.Users.Select(s => s).ToList();
                 Assert.AreEqual(1, users.Count);
@@ -41,7 +41,7 @@ namespace Opri_Test.UnitTest
                         .Options;
 
             // Insert seed data into the database using one instance of the context
-            using (var context = new UsersDBContext(options))
+            using (var context = new UsersDBContext(options, null))
             {
                 context.Add(new User() { Address = "12345", DateOfBith = DateTime.Now, FirstName = "Seed", LastName = "Test" });
                 context.Add(new User() { Address = "12345", DateOfBith = DateTime.Now, FirstName = "Correct", LastName = "Test1234" });
@@ -50,7 +50,7 @@ namespace Opri_Test.UnitTest
             }
 
             // Use a clean instance of the context to run the test
-            using (var context = new UsersDBContext(options))
+            using (var context = new UsersDBContext(options, null))
             {
                 var user = context.Users.FirstOrDefault(s => s.FirstName.Equals("Correct", StringComparison.InvariantCultureIgnoreCase));
                 Assert.IsNotNull(user);
@@ -70,7 +70,7 @@ namespace Opri_Test.UnitTest
                         .Options;
 
             // Insert seed data into the database using one instance of the context
-            using (var context = new UsersDBContext(options))
+            using (var context = new UsersDBContext(options, null))
             {
                 context.Add(new User() { Address = "12345", DateOfBith = DateTime.Now, FirstName = "Seed", LastName = "Test" });
                 context.Add(new User() { Address = "12345", DateOfBith = DateTime.Now, FirstName = "Correct", LastName = "Test1234" });
@@ -79,7 +79,7 @@ namespace Opri_Test.UnitTest
             }
 
             // Use a clean instance of the context to run the test
-            using (var context = new UsersDBContext(options))
+            using (var context = new UsersDBContext(options, null))
             {
                 var user = context.Users.FirstOrDefault(s => s.Id == 3);
                 Assert.IsNotNull(user);
@@ -100,7 +100,7 @@ namespace Opri_Test.UnitTest
             try
             {
                 // Insert seed data into the database using one instance of the context
-                using (var context = new UsersDBContext(options))
+                using (var context = new UsersDBContext(options, null))
                 {
                     context.Add(new User() { Address = "12345", DateOfBith = DateTime.Now, FirstName = "", LastName = "Test" });
                     context.SaveChanges();

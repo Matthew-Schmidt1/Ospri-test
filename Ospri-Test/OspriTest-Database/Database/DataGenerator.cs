@@ -27,6 +27,10 @@ namespace OspriTest.Database
             }
             using (var context = new UsersDBContext(options, logFactory))
             {
+                if (context.Database.IsRelational())
+                {
+                    context.Database.Migrate();
+                }
                 if (context.Users.Any())
                 {
                     log.Information("Database Already Exist!");

@@ -19,7 +19,7 @@ namespace OspriTest.UnitTest.Features
                         .Options;
 
             // Insert seed data into the database using one instance of the context
-            using (var context = new UsersDBContext(options))
+            using (var context = new UsersDBContext(options, null))
             {
                 context.Add(new User() { Address = "142345678910111213141516171819a", DateOfBith = DateTime.Now, FirstName = "Seed", LastName = "Test" });
                 context.Add(new User() { Address = "142345678910111213141516171819a", DateOfBith = DateTime.Now, FirstName = "Correct", LastName = "Test1234" });
